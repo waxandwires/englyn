@@ -1,0 +1,47 @@
+<!-- Englyn axe-core fixture. Two independent sections: one Englyn-compliant,
+     one intentionally broken. sample.test.js loads each section in turn
+     and asserts axe finds zero violations in #compliant and at least one
+     in #broken. Not a full page — loaded as a fragment into a jsdom
+     document body by the test. -->
+
+<section id="compliant" aria-label="Deploy status">
+  <h2>Deploy status</h2>
+
+  <div class="stat-card" data-englyn-role="stat" data-englyn-primitive="perceive"
+       data-englyn-value="87" data-englyn-consumer="both"
+       style="color:#111827; background:#ffffff;">
+    <span aria-hidden="true">87%</span>
+    <span class="sr-only">Deploy success rate: eighty-seven percent.</span>
+  </div>
+
+  <button type="button" aria-describedby="archive-consequence">
+    Archive draft
+  </button>
+  <span id="archive-consequence" class="sr-only">
+    You will review the change before it saves. This archives the draft
+    internally and does not send anything externally.
+  </span>
+
+  <img src="chart.png" alt="Deploy success rate over the last 7 days: rising from seventy-two percent to eighty-seven percent." />
+</section>
+
+<section id="broken" aria-label="Deploy status, broken example">
+  <h4>Deploy status</h4>
+  <!-- heading-order violation: h2 skipped to h4 -->
+
+  <!-- icon-only button, no accessible name -->
+  <button type="button">
+    <span aria-hidden="true">&#10003;</span>
+  </button>
+
+  <!-- color-only status cue, no text equivalent -->
+  <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#2e7d32;"></span>
+
+  <!-- image with no alt text -->
+  <img src="chart.png" />
+
+  <!-- low-contrast text: light gray on white -->
+  <p style="color:#e5e7eb; background:#ffffff;">
+    This text fails contrast requirements on purpose.
+  </p>
+</section>
